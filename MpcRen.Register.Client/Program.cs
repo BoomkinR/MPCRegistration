@@ -45,9 +45,7 @@ class TestService : IHostedService
         var (x1, x2, x3, x4) = _secretShareService.GenerateShares(pass!, 11441180254372124519);
 
         var shares = new[] { (x2, x3, x4), (x1, x3, x4), (x1, x2, x4), (x1, x2, x3) };
-        Console.WriteLine("Waiting for server connecting ...");
-        Task.Delay(TimeSpan.FromSeconds(5)).GetAwaiter().GetResult();
-        Console.WriteLine("Server is not connected. Shut down ...");
+    
         for (int i = 0; i < 4; i++)
         {
             _httpRenRegClient.SendMessageToServer(login!, shares[i], i);
